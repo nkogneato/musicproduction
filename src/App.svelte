@@ -1,9 +1,14 @@
-<script>
-  
+<script lang="ts">
   import Counter from "./lib/Counter.svelte";
-  // Function to play sound when a button is clicked
-  function playSound(sound) {
-    const audio = new Audio(`/sounds/${sound}.wav`); // ✅ Ensure correct file extension
+
+  // Function to play a sound
+  function playSound(sound: string) {  
+    const audio = new Audio(`${import.meta.env.BASE_URL}sounds/${sound}.wav`);
+
+    // Handle sound loading errors
+    audio.onerror = () => alert(`Error loading sound: ${sound}`);
+    
+    // Play the sound
     audio.play();
   }
 </script>
